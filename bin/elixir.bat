@@ -90,15 +90,14 @@ set ERTS_BIN=!ERTS_BIN!
 
 rem Recursive loop called for each parameter that parses the cmd line parameters
 :startloop
-setlocal disabledelayedexpansion
 set "par=%~1"
-endlocal & set "par=%par%"
 if "!par!"=="" (
   rem skip if no parameter
   goto run
 )
 shift
 set par="!par:"=\"!"
+set par="!par:^!=^^^!!"
 if !endLoop! == 1 (
   set parsElixir=!parsElixir! !par!
   goto startloop
@@ -109,27 +108,21 @@ if !par!=="+iex"     (set parsElixir=!parsElixir! +iex && set useIEx=1 && goto s
 if !par!=="+elixirc" (set parsElixir=!parsElixir! +elixirc && goto startloop)
 rem ******* EVAL PARAMETERS ************************
 if ""==!par:-e=! (
-  setlocal disabledelayedexpansion
   set "VAR=%~1"
-  endlocal & set "VAR=%VAR%"
   if not defined VAR (set VAR= )
   set parsElixir=!parsElixir! -e "!VAR:"=\"!"
   shift
   goto startloop
 )
 if ""==!par:--eval=! (
-  setlocal disabledelayedexpansion
   set "VAR=%~1"
-  endlocal & set "VAR=%VAR%"
   if not defined VAR (set VAR= )
   set parsElixir=!parsElixir! --eval "!VAR:"=\"!"
   shift
   goto startloop
 )
 if ""==!par:--rpc-eval=! (
-  setlocal disabledelayedexpansion
   set "VAR=%~2"
-  endlocal & set "VAR=%VAR%"
   if not defined VAR (set VAR= )
   set parsElixir=!parsElixir! --rpc-eval %1 "!VAR:"=\"!"
   shift
