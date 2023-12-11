@@ -98,7 +98,6 @@ if "!par!"=="" (
 shift
 set "par=!par:"=\"!"
 set "par=!par:^|=\^|!"
-set "par=!par:!=^^!!"
 if !endLoop! == 1 (
   set parsElixir=!parsElixir! !par!
   goto startloop
@@ -113,7 +112,6 @@ if ""==!par:-e=! (
   if not defined VAR (set VAR= )
   set "VAR=!VAR:"=\"!"
   set "VAR=!VAR:^|=\^|!"
-  set "VAR=!VAR:!=^^!!"
   set parsElixir=!parsElixir! -e "!VAR"
   shift
   goto startloop
@@ -123,7 +121,6 @@ if ""==!par:--eval=! (
   if not defined VAR (set VAR= )
   set "VAR=!VAR:"=\"!"
   set "VAR=!VAR:^|=\^|!"
-  set "VAR=!VAR:!=^^!!"
   set parsElixir=!parsElixir! --eval "!VAR"
   shift
   goto startloop
@@ -133,7 +130,6 @@ if ""==!par:--rpc-eval=! (
   if not defined VAR (set VAR= )
   set "VAR=!VAR:"=\"!"
   set "VAR=!VAR:^|=\^|!"
-  set "VAR=!VAR:!=^^!!"
   set parsElixir=!parsElixir! --rpc-eval %1 "!VAR"
   shift
   shift
