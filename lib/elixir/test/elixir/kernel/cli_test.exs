@@ -79,7 +79,7 @@ defmodule Kernel.CLITest do
     assert output =~ "hello_world123"
 
     # Check for exclamation mark handling on Windows
-    assert {_output, 0} = System.cmd(elixir_executable(), ["-e", "URI.new!(~s||)"])
+    assert {_output, 0} = System.cmd(elixir_executable(), ["-e", "URI.new!(~s())"])
 
     {output, 0} = System.cmd(iex_executable(), ["-e", "IO.puts :hello_world123; System.halt()"])
     assert output =~ "hello_world123"
