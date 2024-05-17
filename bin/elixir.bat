@@ -97,9 +97,8 @@ if "!par!"=="" (
 )
 shift
 set par="!par:"=\"!"
-set par="!par:^!=^^^!!"
 if !endLoop! == 1 (
-  set parsElixir=!parsElixir! !par!
+  set parsElixir=!parsElixir! "!par!"
   goto startloop
 )
 rem ******* EXECUTION OPTIONS **********************
@@ -154,7 +153,7 @@ if ""==!par:--vm-args=!             (set "parsErlang=!parsErlang! -args_file %~1
 if ""==!par:--erl=!                 (set "beforeExtra=!beforeExtra! %~1" && shift && goto startloop)
 if ""==!par:--pipe-to=!             (echo --pipe-to : Option is not supported on Windows && goto end)
 set endLoop=1
-set parsElixir=!parsElixir! !par!
+set parsElixir=!parsElixir! "!par!"
 goto startloop
 
 :run
